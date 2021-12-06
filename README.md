@@ -4,4 +4,4 @@
 
 # This program is strictly Open Source
 
-# Any questions or comments please email me @ cyberpings@gmail.com
+# For any questions or comments please email me @ cyberpings@gmail.com
