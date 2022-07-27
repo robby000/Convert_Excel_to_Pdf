@@ -1,4 +1,17 @@
-# This is a program to create pdf invoices from data in an excel spreadsheet.
+# This is a program to create pdf invoices from data in an Excel spreadsheet My wife is a Speech therapist and needs
+# to create invoices in a pdf format at the end of every month. Therefore, I created this program to translate all her
+# data that she saved in an Excel spreadsheet to an PDF invoice.
+
+# There is a separate invoice created for every sheet. In each sheet the name of the sheet is the name of
+# school/client and there are three columns on every sheet 1. Client name, 2. Date of session, 3. Price of session.
+
+#  Each invoice consists of three parts a header a footer and a table in the middle. The table in the middle is
+#  generated from the data that is extracted from the excel and so to is some of the information put into the header.
+
+#  There are three external files used to run this program 1. The excel file which has the data,
+#  2. The "address.txt" file which stores the addresses of the schools, 3. The "Invoice Number" file which is used
+#  To store the invoice number for next time the program will be run. If all the data cannot be contained in one
+#  page a two page invoice is created.
 
 
 #  The openpyxl, reportlab and pillow(PIL) libraries must be installed
@@ -39,20 +52,20 @@ margin_left = 250
 
 # dictionary for header information
 header_info = {
-    "company_name": "Company Name",
-    "company_address1": "House Number and Street",
-    "company_address2": "City",
-    "company_address3": "Postcode",
-    "email": "Email",
-    "phone_number": "Phone Number",
+    "company_name": "Clinico Ltd",
+    "company_address1": "96 Fairview Road",
+    "company_address2": "London",
+    "company_address3": "N15 6TP",
+    "email": "clinicofinance@gmail.com",
+    "phone_number": "07958108977",
 }
 
 # dictionary for footer information
 footer_info = {
-    "Therapist": "Therapist's Name",
-    "Account Number": "Account Number: *******",
-    "Sort Code": "Sort Code: **-**-**",
-    "company_registration_num": "Company Registration No: *********"
+    "Therapist": "Malky Gluck",
+    "Account Number": "Account Number: 74888208",
+    "Sort Code": "Sort Code: 60-83-71",
+    "company_registration_num": "Company Registration No: 13014943"
 }
 
 
@@ -220,7 +233,7 @@ while True:
         exit(1)
 
 #  import logo image
-im = Image.open('logo.png')
+im = Image.open('logo.jpeg')
 
 # Open file and retrieve invoice number
 invoice_num_file = open("Invoice Number", "r")
@@ -280,7 +293,7 @@ for sheet in wb:  # creating a new invoice for each sheet in the excel file
     total = sum(price_list)
 
     #  Set pfd document name and size
-    c = canvas.Canvas("Compay Name Invoice " + str(invoice_num) + ".pdf")
+    c = canvas.Canvas("Clinico Ltd Invoice " + str(invoice_num) + ".pdf")
     c.setPageSize((page_width, page_height))
 
     #  creating invoice header from function
@@ -308,9 +321,12 @@ for sheet in wb:  # creating a new invoice for each sheet in the excel file
             rows_list.append(row)
 
         # getting total for sessions of both pages
+        price_list = []
         for k in range(2, number_page_2):
             price = sheet.cell(row=k, column=3).value
             price_list.append(price)
+
+        total2 = sum(price_list)
 
         invoice_header()
 
@@ -318,7 +334,7 @@ for sheet in wb:  # creating a new invoice for each sheet in the excel file
 
         # printing total for sessions of both pages
         c.setFont('VeraBd', 50)
-        text = "Total: £" + str(total)
+        text = "Total: £" + str(total2)
         c.drawString(1810, 550, text)
 
         invoice_footer()
