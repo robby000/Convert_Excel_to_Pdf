@@ -1,6 +1,4 @@
-# This is a program to create pdf invoices from data in an Excel spreadsheet My wife is a Speech therapist and needs
-# to create invoices in a pdf format at the end of every month. Therefore, I created this program to translate all her
-# data that she saved in an Excel spreadsheet to an PDF invoice.
+# This is a program to create pdf invoices from data in an Excel spreadsheet.
 
 # There is a separate invoice created for every sheet. In each sheet the name of the sheet is the name of
 # school/client and there are three columns on every sheet 1. Client name, 2. Date of session, 3. Price of session.
@@ -52,20 +50,20 @@ margin_left = 250
 
 # dictionary for header information
 header_info = {
-    "company_name": "Clinico Ltd",
-    "company_address1": "96 Fairview Road",
-    "company_address2": "London",
-    "company_address3": "N15 6TP",
-    "email": "clinicofinance@gmail.com",
-    "phone_number": "07958108977",
+    "company_name": "*",
+    "company_address1": "*",
+    "company_address2": "*",
+    "company_address3": "*",
+    "email": "*",
+    "phone_number": "*",
 }
 
 # dictionary for footer information
 footer_info = {
-    "Therapist": "Malky Gluck",
-    "Account Number": "Account Number: 74888208",
-    "Sort Code": "Sort Code: 60-83-71",
-    "company_registration_num": "Company Registration No: 13014943"
+    "Therapist": "*",
+    "Account Number": "*",
+    "Sort Code": "*",
+    "company_registration_num": "*"
 }
 
 
@@ -293,7 +291,7 @@ for sheet in wb:  # creating a new invoice for each sheet in the excel file
     total = sum(price_list)
 
     #  Set pfd document name and size
-    c = canvas.Canvas("Clinico Ltd Invoice " + str(invoice_num) + ".pdf")
+    c = canvas.Canvas("* " + str(invoice_num) + ".pdf")
     c.setPageSize((page_width, page_height))
 
     #  creating invoice header from function
